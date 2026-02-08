@@ -1,5 +1,4 @@
 # app.py
-import os
 import streamlit as st
 import requests
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -11,7 +10,7 @@ from langchain_community.vectorstores import FAISS
 API_KEY = st.secrets["GEMINI_API_KEY"]
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/"
-    "models/gemini-1.5-flash:generateContent"
+    f"models/gemini-1.5-flash:generateContent?key={API_KEY}"
 )
 
 # =========================
@@ -62,8 +61,7 @@ Soalan pengguna:
 """
 
     headers = {
-        "Content-Type": "application/json",
-        "X-Goog-Api-Key": API_KEY
+        "Content-Type": "application/json"
     }
 
     data = {
