@@ -9,8 +9,7 @@ from langchain_community.vectorstores import FAISS
 # =========================
 API_KEY = st.secrets["GEMINI_API_KEY"]
 GEMINI_URL = (
-    "https://generativelanguage.googleapis.com/v1/"
-    f"models/gemini-pro:generateContent?key={API_KEY}"
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:GenerateContent"
 )
 
 # =========================
@@ -61,7 +60,8 @@ Soalan pengguna:
 """
 
     headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": API_KEY
     }
 
     data = {
