@@ -28,11 +28,10 @@ vectorstore = FAISS.load_local(
 # =========================
 # Streamlit UI
 # =========================
-st.set_page_config(page_title="📺 Tonton FAQ Chatbot", layout="wide")
 st.title("📺 Tonton FAQ Chatbot")
-st.write("Tanya sebarang soalan berkaitan langganan Tonton")
-
-user_question = st.text_input("Soalan anda:")
+st.header("Tanya sebarang soalan berkaitan langganan Tonton")
+st.subheader("Soalan anda:")
+user_question = st.text_input("")
 
 if user_question:
     # 1. Retrieve relevant FAQ chunks
