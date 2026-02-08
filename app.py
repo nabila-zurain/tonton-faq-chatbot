@@ -1,4 +1,5 @@
 # app.py
+import os
 import streamlit as st
 import requests
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -7,7 +8,7 @@ from langchain_community.vectorstores import FAISS
 # =========================
 # Gemini API setup
 # =========================
-API_KEY = os.environ.get("GEMINI_API_KEY")
+API_KEY = st.secrets["GEMINI_API_KEY"]
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/"
     "models/gemini-2.5-flash:generateContent"
