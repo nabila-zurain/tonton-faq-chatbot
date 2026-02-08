@@ -28,9 +28,23 @@ vectorstore = FAISS.load_local(
 # =========================
 # Streamlit UI
 # =========================
+st.set_page_config(page_title="📺 Tonton FAQ Chatbot", layout="wide")
+
+# Bigger headings
 st.title("📺 Tonton FAQ Chatbot")
 st.header("Tanya sebarang soalan berkaitan langganan Tonton")
 st.subheader("Soalan anda:")
+
+# Increase input box font size
+st.markdown("""
+<style>
+input {
+    font-size: 18px !important;
+    height: 45px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 user_question = st.text_input("")
 
 if user_question:
