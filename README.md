@@ -1,70 +1,94 @@
-# 📺 Tonton FAQ Chatbot (RAG-based)
+# 📺 Tonton FAQ Chatbot
 
-This is a chatbot that answers user questions based on a FAQ document using **Retrieval-Augmented Generation (RAG)**.  
-It uses **FAISS** for vector search and **Gemini v2.5** for generating answers.
+A Retrieval-Augmented Generation (RAG) chatbot that answers questions about Tonton subscriptions based on a custom FAQ knowledge base. Built using **LangChain**, **FAISS**, and **Streamlit**, with responses powered by **Gemini v2.5 Flash API**.
 
 ---
 
 ## Features
 
-- Retrieves relevant FAQ chunks for a user query
-- Generates answers using the Gemini API
-- Simple web interface using **Streamlit**
-- Handles questions not in FAQ gracefully
+- Load FAQ documents, chunk text, and create embeddings using HuggingFace.
+- Store embeddings in **FAISS** for fast similarity search.
+- Retrieve relevant chunks for user queries.
+- Generate answers conditioned on retrieved content using Gemini API.
+- Streamlit web interface for interactive Q&A.
+- Input validation to prevent malicious queries.
 
 ---
 
-## Setup Instructions
+## Screenshot
 
-1. **Clone this repository:**
+![Tonton FAQ Chatbot](screenshot.png)
+
+---
+
+## Getting Started
+
+### 1. Clone the repo
 
 ```bash
-git clone <YOUR_GITHUB_REPO_URL>
-cd <YOUR_REPO_FOLDER>
-```
+git clone https://github.com/nabila-zurain/tonton-faq-chatbot.git
+cd tonton-faq-chatbot
+````
 
-2. **Install dependencies:**
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Prepare the vector store:**
+### 3. Prepare the vector database
 
 ```bash
 python ingest.py
 ```
 
-This will read `faq.txt`, split it into chunks, embed it, and save a FAISS index locally.
+This will create a FAISS vector store in the `faiss_index/` folder.
 
-4. **Run the chatbot:**
+### 4. Set Gemini API key securely
+
+Create a folder `.streamlit` in the repo root and a file `secrets.toml` inside it:
+
+```toml
+# .streamlit/secrets.toml
+GEMINI_API_KEY = "YOUR_GEMINI_KEY"
+```
+
+### 5. Run the Streamlit app
 
 ```bash
 streamlit run app.py
 ```
 
-Then open the link provided by Streamlit (usually `http://localhost:8501`) in your browser.
+Access it locally at `http://localhost:8501`.
 
 ---
 
-## How it works
+## Deployment
 
-1. User types a question in the Streamlit app
-2. The app retrieves the most relevant FAQ chunks from FAISS
-3. Gemini API generates a detailed answer conditioned on those chunks
-4. Answer is displayed in the app
+The app is also deployed on **Streamlit Cloud**:
+[https://tonton-faq-chatbot-2fqw7ajahx6jnwbdjzwcrx.streamlit.app/](https://tonton-faq-chatbot-2fqw7ajahx6jnwbdjzwcrx.streamlit.app/)
 
 ---
 
-## Example Usage
+## Project Structure
 
-**Question:** `Bagaimana cara langganan Tonton?`
-**Answer:** `Langkah-langkah untuk melanggan Tonton adalah: ...`
+```
+rag-chatbot/
+├── app.py              # Main Streamlit app
+├── ingest.py           # Script to load, split, embed, and save FAQ
+├── faiss_index/        # FAISS vector store
+├── requirements.txt    # Dependencies
+├── screenshot.png      # Screenshot of chatbot UI
+└── README.md
+```
 
 ---
 
 ## Notes
 
-* Ensure your Gemini API key is valid
-* The chatbot currently only uses the FAQ data (`faq.txt`)
-* For production, consider adding guardrails for harmful prompts
+* Preferably use **Gemini v2.5 Flash API** for responses.
+* Ensure your API key is set in `st.secrets` to avoid exposing it in GitHub.
+* The code is modular and documented for clarity.
+* FAISS is used for vector-based retrieval of relevant FAQ content.
+* The chatbot only answers based on the FAQ; if info is missing, it replies:
+  `"Maaf, maklumat tidak ditemui dalam FAQ."`
