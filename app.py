@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 # =========================
 API_KEY = st.secrets["GEMINI_API_KEY"]
 GEMINI_URL = (
-    "https://generativelanguage.googleapis.com/v1beta/"
+    "https://generativelanguage.googleapis.com/v1/"
     f"models/gemini-1.5-flash:generateContent?key={API_KEY}"
 )
 
