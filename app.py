@@ -28,6 +28,7 @@ vectorstore = FAISS.load_local(
 # =========================
 # Streamlit UI
 # =========================
+st.set_page_config(page_title="📺 Tonton FAQ Chatbot", layout="wide")
 st.title("📺 Tonton FAQ Chatbot")
 st.write("Tanya sebarang soalan berkaitan langganan Tonton")
 
@@ -40,14 +41,19 @@ if user_question:
 
     # 2. Build prompt
     prompt = f"""
+Anda ialah chatbot sokongan pelanggan.
+
 Gunakan maklumat di bawah sahaja untuk menjawab soalan pengguna.
-Jika jawapan tiada, jawab: "Maaf, maklumat tidak ditemui dalam FAQ."
+Jika jawapan berbentuk senarai atau langkah-langkah, senaraikan SEMUA langkah secara lengkap.
+Jika maklumat tiada, jawab: "Maaf, maklumat tidak ditemui dalam FAQ."
 
 Maklumat FAQ:
 {context}
 
 Soalan pengguna:
 {user_question}
+
+Sila pastikan jawapan lengkap dan tidak dipotong.
 """
 
     # 3. Call Gemini API
