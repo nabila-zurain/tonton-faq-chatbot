@@ -8,9 +8,7 @@ from langchain_community.vectorstores import FAISS
 # Gemini API setup
 # =========================
 API_KEY = st.secrets["GEMINI_API_KEY"]
-GEMINI_URL = (
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:GenerateContent"
-)
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/chat-bison-001:chat"
 
 # =========================
 # Load vector database
@@ -61,13 +59,15 @@ Soalan pengguna:
 
     headers = {
         "Content-Type": "application/json",
-        "X-Goog-Api-Key": API_KEY
+        "Authorization": f"Bearer {API_KEY}"
     }
 
     data = {
-        "contents": [
-            {"parts": [{"text": prompt}]}
-        ]
+    "messages": [
+        {"role": "system", "content": "Anda ialah chatbot sokongan pelanggan. Jawab soalan berdasarkan FAQ sahaja."},
+        {"role": "user", "content": prompt}
+    ],
+    "temperature": 0.2
     }
 
     try:
