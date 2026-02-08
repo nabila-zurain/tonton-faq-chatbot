@@ -11,7 +11,7 @@ from langchain_community.vectorstores import FAISS
 API_KEY = st.secrets["GEMINI_API_KEY"]
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/"
-    "models/gemini-2.5-flash:generateContent"
+    "models/gemini-1.5-flash:generateContent"
 )
 
 # =========================
