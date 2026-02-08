@@ -66,9 +66,11 @@ Soalan pengguna:
     }
 
     data = {
-        "contents": [
-            {"parts": [{"text": prompt}]}
-        ]
+    "messages": [
+        {"role": "system", "content": "Anda ialah chatbot sokongan pelanggan. Jawab soalan berdasarkan FAQ sahaja."},
+        {"role": "user", "content": prompt}
+    ],
+    "temperature": 0.2
     }
 
     try:
